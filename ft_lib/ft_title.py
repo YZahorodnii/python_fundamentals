@@ -1,27 +1,23 @@
-obj = 'aBC4d'
-
 def ft_title(obj):
-    j = 0
-    s = ''
-    start = True
-    i = 1
+    res = ""
+    start = False
     if isinstance(obj, str):
         for item in obj:
-            if ord(item) in range(97, 123) and start:
-                j = ord(item) - 32
-                s = s + chr(j)
-                # print(ord(item))
+            if ord(item) not in range(97, 123) and ord(item) not in range(65, 91):
+                res = res + chr(ord(item))
                 start = False
-            elif ord(item) in range(65, 91):
-                j = ord(item) + 32
-                s = s + chr(j)
-                start = True
-            elif not start and ord(item) in range(97, 123):
-                j = ord(item)
-                s = s + chr(j)
             else:
-                j = ord(item)
-                s = s + chr(j)
-        print(s)
+                if (ord(item) in range(97, 123) or ord(item) in range(65, 91)) and not start:
+                    if ord(item) in range(97, 123):
+                        res = res + chr(ord(item) - 32)
+                    else:
+                        res = res + chr(ord(item))
 
-ft_title(obj)
+                    start = True
+                elif (ord(item) in range(97, 123) or ord(item) in range(65, 91)) and start:
+                    if ord(item) in range(97, 123):
+                        res = res + chr(ord(item))
+                    else:
+                        res = res + chr(ord(item) + 32)
+
+    return res
